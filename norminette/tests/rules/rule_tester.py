@@ -7,7 +7,6 @@ from registry import Registry
 from context import Context
 from io import StringIO
 
-
 registry = Registry()
 
 

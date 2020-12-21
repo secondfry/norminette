@@ -1,9 +1,7 @@
-
-import sys
-import glob
 import difflib
-from lexer import Lexer
-from lexer import TokenError
+import sys
+
+from lexer import Lexer, TokenError
 from tests.lexer.errors.dict import failed_tokens_tests as test_dict
 
 

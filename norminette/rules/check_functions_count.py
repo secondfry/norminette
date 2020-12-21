@@ -1,6 +1,4 @@
-from lexer import Token
 from rules import Rule
-import string
 
 
 class CheckFunctionsCount(Rule):

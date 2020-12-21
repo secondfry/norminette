@@ -1,5 +1,4 @@
 from rules import Rule
-from scope import *
 
 operators = [
     "RIGHT_ASSIGN",
@@ -38,6 +37,7 @@ operators = [
     "LEFT_SHIFT",
 ]
 nest_kw = ["RPARENTHESIS", "LPARENTHESIS", "NEWLINE"]
+
 
 class CheckNestLineIndent(Rule):
     def __init__(self):

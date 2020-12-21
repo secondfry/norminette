@@ -1,5 +1,5 @@
 from rules import Rule
-from scope import *
+
 operators = [
     "RIGHT_ASSIGN",
     "LEFT_ASSIGN",
@@ -38,6 +38,7 @@ operators = [
 ]
 
 nest_kw = ["RPARENTHESIS", "LPARENTHESIS", "NEWLINE"]
+
 
 class CheckAssignationIndent(Rule):
     def __init__(self):

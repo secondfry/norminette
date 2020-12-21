@@ -1,6 +1,6 @@
-from rules import PrimaryRule
-from context import Function, ControlStructure
 from exceptions import CParsingError
+from rules import PrimaryRule
+from scope import Function, ControlStructure
 
 keywords = [
     "BREAK",
@@ -19,7 +19,8 @@ operators = [
     "DOT"
 ]
 
-ws = ["SPACE", "TAB","NEWLINE"]
+ws = ["SPACE", "TAB", "NEWLINE"]
+
 
 class IsExpressionStatement(PrimaryRule):
     def __init__(self):
@@ -43,7 +44,7 @@ class IsExpressionStatement(PrimaryRule):
                 i += 1
             if context.check_token(i, "IDENTIFIER") is False:
                 if context.check_token(i, "LPARENTHESIS") is True:
-                    #parse label value here
+                    # parse label value here
                     i = context.skip_nest(i)
                 elif context.debug == 0:
                     raise CParsingError("Goto statement should be followed by a label")

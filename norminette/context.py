@@ -1,8 +1,7 @@
-from norm_error import NormError
-from lexer.dictionary import operators, brackets
-from tools.colors import colors
-from scope import *
 from exceptions import CParsingError
+from norm_error import NormError
+from scope import GlobalScope, ControlStructure
+from tools.colors import colors
 
 types = [
     "CHAR",
@@ -198,7 +197,9 @@ class Context:
             after a primary rule has succeeded.
             Do nothing on empty lines since they can be anywhere
         """
-        if len(self.history) > 0 and (self.history[-1] == "IsEmptyLine" or self.history[-1] == "IsComment" or self.history[-1] == "IsPreprocessorStatement"):
+        if len(self.history) > 0 and (
+                self.history[-1] == "IsEmptyLine" or self.history[-1] == "IsComment" or self.history[
+            -1] == "IsPreprocessorStatement"):
             return
         if self.sub is not None:
             self.scope = self.sub
@@ -217,7 +218,7 @@ class Context:
             return
         print(f"{colors(self.filename, 'cyan')} - {colors(rule, 'green')} \
 In \"{self.scope.name}\" from \
-\"{self.scope.parent.name if self.scope.parent is not  None else None}\" line {self.tokens[0].pos[0]}\":")
+\"{self.scope.parent.name if self.scope.parent is not None else None}\" line {self.tokens[0].pos[0]}\":")
         i = 0
         for t in self.tokens[:pos]:
             if i == 0:
@@ -249,7 +250,6 @@ In \"{self.scope.name}\" from \
         while self.check_token(pos, ws):
             pos += 1
         return pos
-
 
     def skip_nest_reverse(self, pos):
         """Skips anything between two brackets, parentheses or braces starting
@@ -335,7 +335,7 @@ In \"{self.scope.name}\" from \
                 if self.check_token(i, "IDENTIFIER") is True:
                     i += 1
                     return True, i
-                #Raise CParsingError?
+                # Raise CParsingError?
             if self.check_token(i, types + ["IDENTIFIER", "TYPEDEF"]) is False:
                 return False, 0
             if self.check_token(i, "IDENTIFIER") is True:
@@ -471,7 +471,7 @@ In \"{self.scope.name}\" from \
                         tmp += 1
                     while self.check_token(tmp, "RPARENTHESIS"):
                         tmp += 1
-                        #start = tmp
+                        # start = tmp
                     tmp = self.skip_ws(tmp)
                     if self.check_token(tmp, "LPARENTHESIS"):
                         return "pointer", self.skip_nest(start)

@@ -1,9 +1,8 @@
 import importlib
 import os
-from .rule import Rule, PrimaryRule
 from glob import glob
-from functools import cmp_to_key
 
+from .rule import Rule, PrimaryRule
 
 path = os.path.dirname(os.path.realpath(__file__))
 files = glob(path + "/check_*.py")
@@ -28,7 +27,6 @@ for f in files:
     rule = getattr(module, class_name)
     primary_rules[class_name] = rule()
 
-
 primary_rules = [v for k, v in sorted(
-        primary_rules.items(),
-        key=lambda item: -item[1].priority)]
+    primary_rules.items(),
+    key=lambda item: -item[1].priority)]

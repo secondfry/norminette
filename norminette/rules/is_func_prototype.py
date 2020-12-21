@@ -1,6 +1,5 @@
-from lexer import Token
 from rules import PrimaryRule
-from context import GlobalScope, Function, UserDefinedType
+from scope import GlobalScope, UserDefinedType
 
 whitespaces = ["SPACE", "TAB"]
 preproc = [
@@ -55,6 +54,8 @@ type_identifier = [
     "LONG",
     "SHORT",
 ]
+
+
 class IsFuncPrototype(PrimaryRule):
     def __init__(self):
         super().__init__()
@@ -117,7 +118,7 @@ class IsFuncPrototype(PrimaryRule):
         identifier = None
         if context.check_token(i, "NEWLINE") is True:
             return False, 0
-        while context.peek_token(i):# and context.check_token(i, "NEWLINE") is False:
+        while context.peek_token(i):  # and context.check_token(i, "NEWLINE") is False:
             if context.check_token(i, misc_identifier) is True:
                 misc_id.append(context.peek_token(i))
             elif context.check_token(i, type_identifier) is True:

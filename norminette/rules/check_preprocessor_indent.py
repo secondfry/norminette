@@ -1,7 +1,7 @@
 from rules import Rule
 
 ALLOWED_PREPROC = ["DEFINE", "IFNDEF", "IFDEF", "#IF", "ELIF", "#ELSE", "ENDIF", "INCLUDE"]
-TOO_MUCH_INDENT = ["IFNDEF", "IFDEF", "ELIF",  "#IF", "#ELSE"]
+TOO_MUCH_INDENT = ["IFNDEF", "IFDEF", "ELIF", "#IF", "#ELSE"]
 
 
 class CheckPreprocessorIndent(Rule):

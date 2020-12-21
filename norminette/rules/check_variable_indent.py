@@ -1,8 +1,7 @@
-from rules import Rule
-from scope import *
 import math
 import string
 
+from rules import Rule
 
 keywords = [
     # C reserved keywords #
@@ -37,7 +36,7 @@ keywords = [
     "UNSIGNED",
     "VOID",
     "VOLATILE",
-    "WHILE", 
+    "WHILE",
     "IDENTIFIER"
 ]
 assigns_or_eol = [
@@ -57,11 +56,11 @@ assigns_or_eol = [
     "COMMA"
 ]
 
+
 class CheckVariableIndent(Rule):
     def __init__(self):
         super().__init__()
         self.depends_on = ["IsVarDeclaration"]
-
 
     def check_tabs(self, context):
         i = 0
@@ -108,7 +107,7 @@ class CheckVariableIndent(Rule):
                 current_indent += 1
                 type_identifier_nb -= 1
             elif context.check_token(i, "TAB") and type_identifier_nb > 0 and \
-                line_start == False:
+                    line_start == False:
                 context.new_error("TAB_REPLACE_SPACE", context.peek_token(i))
             i += 1
         return False, 0
@@ -131,7 +130,7 @@ class CheckVariableIndent(Rule):
         if context.check_token(i - 1, ["MULT", "BWISE_AND", "LPARENTHESIS"]) is True:
             i -= 1
             while context.check_token(i - 1, ["MULT", "BWISE_AND", "LPARENTHESIS"]) is True \
-            and context.is_operator(i) is False:
+                    and context.is_operator(i) is False:
                 i -= 1
             identifier = context.peek_token(i)
         if context.scope.vars_alignment == 0:

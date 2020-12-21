@@ -1,5 +1,4 @@
 from rules import Rule
-from scope import *
 
 allowed_in_header = [
     "IsVarDeclaration",
@@ -18,6 +17,7 @@ must_be_within_define = [
     "IsUserDefinedType",
     "IsFuncPrototype",
 ]
+
 
 class CheckInHeader(Rule):
     def __init__(self):

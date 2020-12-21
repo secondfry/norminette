@@ -1,4 +1,3 @@
-from lexer import Token
 from rules import Rule
 
 type_specifiers = [

@@ -1,8 +1,5 @@
-from lexer import Token
 from rules import PrimaryRule
-from context import GlobalScope, UserDefinedType
-from exceptions import CParsingError
-from scope import *
+from scope import GlobalScope, UserDefinedType, UserDefinedEnum
 
 utypes = ["TYPEDEF", "UNION", "STRUCT", "ENUM"]
 
@@ -12,7 +9,6 @@ class IsUserDefinedType(PrimaryRule):
         super().__init__()
         self.priority = 10
         self.scope = [GlobalScope, UserDefinedType]
-
 
     def typedef(self, context, pos):
         i = context.skip_ws(pos)

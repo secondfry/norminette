@@ -1,5 +1,4 @@
 from rules import Rule
-from scope import *
 
 
 class CheckLabel(Rule):

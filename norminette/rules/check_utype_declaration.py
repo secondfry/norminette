@@ -1,8 +1,4 @@
 from rules import Rule
-from lexer import Lexer, TokenError
-from scope import *
-import math
-from exceptions import CParsingError
 
 types = [
     "STRUCT",
@@ -27,6 +23,7 @@ utypes = [
     "ENUM",
     "UNION"
 ]
+
 
 class CheckUtypeDeclaration(Rule):
     def __init__(self):
@@ -95,7 +92,8 @@ class CheckUtypeDeclaration(Rule):
                     if context.debug >= 1:
                         pass
                     elif context.debug == 0:
-                        raise CParsingError(f"{context.filename}: Could not parse structure line {context.peek_token(0).pos[0]}")
+                        raise CParsingError(
+                            f"{context.filename}: Could not parse structure line {context.peek_token(0).pos[0]}")
             loc = ids[0][1]
         else:
             loc = ids[0][1]
@@ -126,7 +124,7 @@ class CheckUtypeDeclaration(Rule):
             if context.check_token(i - 1, ["MULT", "BWISE_AND", "LPARENTHESIS"]) is True:
                 i -= 1
                 while context.check_token(i, ["MULT", "BWISE_AND", "LPARENTHESIS"]) is True \
-                and context.is_operator(i) is False:
+                        and context.is_operator(i) is False:
                     i -= 1
             current_indent = context.peek_token(i).pos[1]
             if context.scope.vars_alignment == 0:

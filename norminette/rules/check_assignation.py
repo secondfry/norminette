@@ -1,5 +1,5 @@
 from rules import Rule
-from scope import *
+
 assigns = [
     "RIGHT_ASSIGN",
     "LEFT_ASSIGN",

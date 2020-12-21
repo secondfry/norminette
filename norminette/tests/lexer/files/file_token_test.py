@@ -1,8 +1,8 @@
-import sys
-import glob
 import difflib
-from lexer import Lexer
-from lexer import TokenError
+import glob
+import sys
+
+from lexer import TokenError, Lexer
 
 
 def read_file(filename):

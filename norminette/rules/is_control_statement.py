@@ -1,6 +1,5 @@
 from rules import PrimaryRule
-from context import ControlStructure, Function, GlobalScope
-from exceptions import CParsingError
+from scope import Function, ControlStructure, GlobalScope
 
 cs_keywords = ["DO", "WHILE", "FOR", "IF", "ELSE", "SWITCH", "CASE", "DEFAULT", "IDENTIFIER"]
 whitespaces = ["TAB", "SPACE", "NEWLINE"]

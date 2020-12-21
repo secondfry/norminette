@@ -1,5 +1,4 @@
 from rules import Rule
-from scope import *
 
 assigns = [
     "RIGHT_ASSIGN",
@@ -14,6 +13,7 @@ assigns = [
     "OR_ASSIGN",
     "ASSIGN",
 ]
+
 
 class CheckVariableDeclaration(Rule):
     def __init__(self):

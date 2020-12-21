@@ -1,6 +1,4 @@
 from rules import PrimaryRule
-from context import ControlStructure, Function
-
 
 cs_keywords = ["DO", "WHILE", "FOR", "IF", "ELSE", "SWITCH"]
 whitespaces = ["TAB", "SPACE", "NEWLINE"]

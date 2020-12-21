@@ -88,6 +88,8 @@ digits or '_'",
     "ARG_TYPE_UKN": "Unrecognized variable type",
     "COMMENT_ON_INSTR": "Comment must be on its own line"
 }
+
+
 class NormError:
     def __init__(self, errno, line, col=None):
         self.errno = errno

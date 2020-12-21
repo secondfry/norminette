@@ -1,6 +1,5 @@
-from lexer import Token
 from rules import Rule
-import string
+
 
 class IsTernary(Rule):
     def __init__(self):

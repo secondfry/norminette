@@ -1,6 +1,6 @@
+from lexer import Lexer
 from rules import Rule
-from lexer import Lexer, TokenError
-from scope import *
+from scope import GlobalScope
 
 
 class CheckPreprocessorInclude(Rule):

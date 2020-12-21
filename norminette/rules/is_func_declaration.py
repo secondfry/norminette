@@ -1,6 +1,5 @@
-from lexer import Token
 from rules import PrimaryRule
-from context import GlobalScope, Function, UserDefinedType
+from scope import GlobalScope, Function
 
 whitespaces = ["SPACE", "TAB"]
 preproc = [
@@ -55,6 +54,8 @@ type_identifier = [
     "LONG",
     "SHORT",
 ]
+
+
 class IsFuncDeclaration(PrimaryRule):
     def __init__(self):
         super().__init__()
@@ -164,7 +165,7 @@ class IsFuncDeclaration(PrimaryRule):
                     i += 1
             else:
                 i += 1
-        #print (type_id, args, identifier)
+        # print (type_id, args, identifier)
         if len(type_id) > 0 and args == True and identifier != None:
             i = identifier[1]
             i = context.skip_ws(i, nl=True)

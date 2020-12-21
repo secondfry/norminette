@@ -1,6 +1,4 @@
-from lexer import Token
 from rules import PrimaryRule
-from context import GlobalScope, UserDefinedType, ControlStructure, Function
 
 
 class IsComment(PrimaryRule):

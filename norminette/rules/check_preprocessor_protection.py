@@ -1,6 +1,6 @@
+from lexer import Lexer
 from rules import Rule
-from lexer import Lexer, TokenError
-from scope import *
+from scope import GlobalScope
 
 
 class CheckPreprocessorProtection(Rule):
@@ -28,7 +28,8 @@ class CheckPreprocessorProtection(Rule):
         content = Lexer(val, context.peek_token(i).pos[0])
         tkns = content.get_tokens()
         if context.check_token(i, "IFNDEF") is True:
-            if len(tkns) >= 1 and tkns[0].value == protection and context.scope.header_protection == -1 and context.preproc_scope_indent == 1:
+            if len(tkns) >= 1 and tkns[
+                0].value == protection and context.scope.header_protection == -1 and context.preproc_scope_indent == 1:
                 if len(context.history) > 1:
                     for i in range(len(context.history) - 2, 0, -1):
                         if context.history[i] != "IsEmptyLine" and context.history[i] != "IsComment":

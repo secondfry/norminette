@@ -1,6 +1,4 @@
 from rules import Rule
-from scope import *
-
 
 
 class CheckEmptyLine(Rule):

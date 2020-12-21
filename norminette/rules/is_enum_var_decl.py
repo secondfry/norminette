@@ -1,8 +1,5 @@
-from lexer import Token
 from rules import PrimaryRule
-from scope import *
-from context import GlobalScope, UserDefinedType, ControlStructure, Function, UserDefinedEnum
-
+from scope import UserDefinedEnum
 
 lbrackets = ["LBRACE", "LPARENTHESIS", "LBRACKET"]
 rbrackets = ["RBRACE", "RPARENTHESIS", "RBRACKET"]

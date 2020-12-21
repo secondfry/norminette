@@ -1,5 +1,6 @@
 from rules import Rule
-from scope import *
+from scope import GlobalScope, ControlStructure
+
 
 class CheckBlockStart(Rule):
     def __init__(self):
@@ -24,7 +25,7 @@ class CheckBlockStart(Rule):
                         hist_2 = item
                     i += 1
             if type(context.scope) is GlobalScope and context.scope.tmp_scope is not None \
-            and hist_1 == "IsFuncDeclaration" and hist_2 == "IsPreprocessorStatement":
+                    and hist_1 == "IsFuncDeclaration" and hist_2 == "IsPreprocessorStatement":
                 context.scope.functions -= 1
                 context.scope = context.tmp_scope
                 context.scope.multiline = True

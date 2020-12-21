@@ -1,21 +1,19 @@
-from rules import PrimaryRule, Rule
-import context
-from scope import GlobalScope
+from rules import PrimaryRule
 
 pp_keywords = [
-                "PRAGMA",
-                "INCLUDE",
-                "UNDEF",
-                "DEFINE",
-                "#IF",
-                "ELIF",
-                "#ELSE",
-                "IFDEF",
-                "IFNDEF",
-                "ENDIF",
-                "ERROR",
-                "WARNING",
-                "IMPORT"]
+    "PRAGMA",
+    "INCLUDE",
+    "UNDEF",
+    "DEFINE",
+    "#IF",
+    "ELIF",
+    "#ELSE",
+    "IFDEF",
+    "IFNDEF",
+    "ENDIF",
+    "ERROR",
+    "WARNING",
+    "IMPORT"]
 
 whitespaces = ["TAB", "SPACE", "NEWLINE"]
 

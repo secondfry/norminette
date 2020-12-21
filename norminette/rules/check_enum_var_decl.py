@@ -1,5 +1,5 @@
 from rules import Rule
-from scope import *
+
 
 class CheckEnumVarDecl(Rule):
     def __init__(self):
@@ -18,7 +18,7 @@ class CheckEnumVarDecl(Rule):
                     if context.check_token(i, "LBRACE") is True:
                         return False, 0
                     i += 1
-                #context.new_error("NEWLINE_IN_DECL", context.peek_token(i))
+                # context.new_error("NEWLINE_IN_DECL", context.peek_token(i))
                 return True, i
             i += 1
         return False, 0

@@ -1,7 +1,6 @@
 from rules import PrimaryRule
-from context import GlobalScope, VariableAssignation
-from exceptions import CParsingError
-
+# TODO is this proper import?
+from rules.check_assignation_indent import operators
 
 assign_ops = [
     "RIGHT_ASSIGN",
@@ -73,7 +72,7 @@ class IsAssignation(PrimaryRule):
         i = pos
         while context.check_token(i, types + ws + op + ["IDENTIFIER", "CONSTANT"]):
             if context.check_token(i, "LBRACKET"):
-                    i = context.skip_nest(i)
+                i = context.skip_nest(i)
             i += 1
         if "IDENTIFIER" in [t.type for t in context.tokens[:i + 1]]:
             return True, i
@@ -92,10 +91,10 @@ class IsAssignation(PrimaryRule):
             return False, 0
         i += 1
         i = context.skip_ws(i)
-        #if context.check_token(i, "LBRACE") is True:
-            #i += 1
-            #context.sub = context.scope.inner(VariableAssignation)
-            #return True, i
+        # if context.check_token(i, "LBRACE") is True:
+        # i += 1
+        # context.sub = context.scope.inner(VariableAssignation)
+        # return True, i
         if context.scope.name == "UserDefinedEnum":
             while context.peek_token(i) and (context.check_token(i, ['COMMA', 'SEMI_COLON', 'NEWLINE'])) is False:
                 i += 1

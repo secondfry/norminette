@@ -1,11 +1,5 @@
-from lexer import Token
 from rules import PrimaryRule
-from context import (
-                    Function,
-                    UserDefinedType,
-                    VariableAssignation,
-                    ControlStructure,
-                    UserDefinedEnum)
+from scope import ControlStructure, UserDefinedType, UserDefinedEnum, VariableAssignation
 
 
 class IsBlockEnd(PrimaryRule):
@@ -59,7 +53,7 @@ class IsBlockEnd(PrimaryRule):
         if type(context.scope) is VariableAssignation:
             i = context.skip_ws(i)
             if context.check_token(i, "SEMI_COLON"):
-                #Fatal err?
+                # Fatal err?
                 return False, 0
             i += 1
             i = context.eol(i)

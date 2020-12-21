@@ -1,7 +1,7 @@
-import re
 import string
-from lexer.tokens import Token
-from lexer.dictionary import keywords, preproc_keywords, operators, brackets
+
+from lexer import Token
+from lexer.dictionary import keywords, operators, preproc_keywords, brackets
 
 
 def read_file(filename):
@@ -54,8 +54,8 @@ class Lexer:
             # position on the line, if there's an easier way to calculate this
             # you're welcome
             self.__line_pos = int((
-                                self.__line_pos + 4 -
-                                (self.__line_pos - 1) % 4) * 5 / 5)
+                                          self.__line_pos + 4 -
+                                          (self.__line_pos - 1) % 4) * 5 / 5)
         else:
             self.__line_pos += 1
         if self.__pos < self.len and self.src[self.__pos] == '\\':
@@ -139,9 +139,9 @@ class Lexer:
             if self.peek_char() == '\'':
                 self.pop_char()
                 self.tokens.append(Token(
-                                        "CHAR_CONST",
-                                        pos,
-                                        tkn_value))
+                    "CHAR_CONST",
+                    pos,
+                    tkn_value))
                 return
             self.pop_char()
         raise TokenError(pos)
@@ -208,19 +208,19 @@ class Lexer:
             elif self.peek_char() in "uU":
                 if "u" in tkn_value or "U" in tkn_value \
                         or (("e" in tkn_value or "E" in tkn_value
-                            or "f" in tkn_value or "F" in tkn_value)
+                             or "f" in tkn_value or "F" in tkn_value)
                             and (
-                                "0x" not in tkn_value
-                                and "0X" not in tkn_value)):
+                                    "0x" not in tkn_value
+                                    and "0X" not in tkn_value)):
                     raise TokenError(pos)
 
             elif self.peek_char() in "Ff":
                 if tkn_value.startswith("0x") is False \
                         and tkn_value.startswith("0X") is False \
                         and (
-                            "." not in tkn_value
-                            or "f" in tkn_value
-                            or "F" in tkn_value) \
+                        "." not in tkn_value
+                        or "f" in tkn_value
+                        or "F" in tkn_value) \
                         or "u" in tkn_value or "U" in tkn_value \
                         or "l" in tkn_value or "L" in tkn_value:
                     raise TokenError(pos)
@@ -290,8 +290,8 @@ class Lexer:
         tkn_value = ""
         while self.peek_char() and \
                 (
-                    self.peek_char() in string.ascii_letters + "0123456789_"
-                    or self.peek_char() == "\\\n"):
+                        self.peek_char() in string.ascii_letters + "0123456789_"
+                        or self.peek_char() == "\\\n"):
             if self.peek_char() == "\\\n":
                 self.pop_char()
                 continue
@@ -314,45 +314,45 @@ class Lexer:
 
             if self.peek_sub_string(3) in [">>=", "<<=", "..."]:
                 self.tokens.append(Token(
-                            operators[self.peek_sub_string(3)],
-                            pos))
+                    operators[self.peek_sub_string(3)],
+                    pos))
                 self.__pos += 3
 
             elif self.peek_sub_string(2) in [">>", "<<", "->"]:
                 self.tokens.append(Token(
-                            operators[self.peek_sub_string(2)],
-                            pos))
+                    operators[self.peek_sub_string(2)],
+                    pos))
                 self.__pos += 2
 
             elif self.peek_sub_string(2) == self.peek_char() + "=":
                 self.tokens.append(Token(
-                            operators[self.peek_sub_string(2)],
-                            pos))
+                    operators[self.peek_sub_string(2)],
+                    pos))
                 self.pop_char(), self.pop_char()
 
             elif self.peek_char() in "+-<>=&|":
                 if self.peek_sub_string(2) == self.peek_char() * 2:
                     self.tokens.append(Token(
-                                operators[self.peek_sub_string(2)],
-                                pos))
+                        operators[self.peek_sub_string(2)],
+                        pos))
                     self.pop_char()
                     self.pop_char()
 
                 else:
                     self.tokens.append(Token(
-                                operators[self.peek_char()], pos))
+                        operators[self.peek_char()], pos))
                     self.pop_char()
 
             else:
                 self.tokens.append(Token(
-                        operators[self.peek_char()],
-                        pos))
+                    operators[self.peek_char()],
+                    pos))
                 self.pop_char()
 
         else:
             self.tokens.append(Token(
-                    operators[self.src[self.__pos]],
-                    pos))
+                operators[self.src[self.__pos]],
+                pos))
             self.pop_char()
 
     def preprocessor(self):
@@ -377,9 +377,9 @@ class Lexer:
             if tkn_key not in preproc_keywords and tkn_key[:len('include')] == 'include':
                 tkn_key = 'include'
             self.tokens.append(Token(
-                        preproc_keywords.get(tkn_key),
-                        pos,
-                        tkn_value))
+                preproc_keywords.get(tkn_key),
+                pos,
+                tkn_value))
 
     def get_next_token(self):
         """Peeks one character and tries to match it to a token type,
@@ -390,7 +390,7 @@ class Lexer:
             if self.is_string():
                 self.string()
 
-            elif (self.peek_char().isalpha() and self.peek_char().isascii())or self.peek_char() == '_':
+            elif (self.peek_char().isalpha() and self.peek_char().isascii()) or self.peek_char() == '_':
                 self.identifier()
 
             elif self.is_constant():
@@ -419,7 +419,7 @@ class Lexer:
                 self.tokens.append(Token("TAB", self.line_pos()))
                 self.pop_char()
 
-            elif self.peek_char() == '\n':# or ord(self.peek_char()) == 8203:
+            elif self.peek_char() == '\n':  # or ord(self.peek_char()) == 8203:
                 self.tokens.append(Token("NEWLINE", self.line_pos()))
                 self.pop_char()
                 self.__line_pos = 1
@@ -433,8 +433,8 @@ class Lexer:
 
             elif self.peek_char() in brackets:
                 self.tokens.append(Token(
-                                    brackets[self.peek_char()],
-                                    self.line_pos()))
+                    brackets[self.peek_char()],
+                    self.line_pos()))
                 self.pop_char()
 
             else:

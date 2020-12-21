@@ -1,7 +1,5 @@
-from lexer import Token
 from rules import PrimaryRule
-from context import GlobalScope, UserDefinedType, ControlStructure, Function
-
+from scope import GlobalScope, UserDefinedType, Function, ControlStructure
 
 lbrackets = ["LBRACE", "LPARENTHESIS", "LBRACKET"]
 rbrackets = ["RBRACE", "RPARENTHESIS", "RBRACKET"]
@@ -32,6 +30,7 @@ type_specifiers = [
     "ENUM",
     "UNION"
 ]
+
 
 class IsVarDeclaration(PrimaryRule):
     def __init__(self):
@@ -89,7 +88,8 @@ class IsVarDeclaration(PrimaryRule):
                 i -= 1
                 if ret is False:
                     return False, pos
-            elif context.check_token(i, ['SPACE', "TAB", "MULT", "BWISE_AND", "NEWLINE"] + misc_specifiers + type_specifiers):
+            elif context.check_token(i, ['SPACE', "TAB", "MULT", "BWISE_AND",
+                                         "NEWLINE"] + misc_specifiers + type_specifiers):
                 pass
             elif parenthesis == 0 and brackets == 0 and braces == 0:
                 return False, 0
@@ -114,7 +114,7 @@ class IsVarDeclaration(PrimaryRule):
         identifier = False
         i += 1
         p = 1
-        plvl= 0 # nesting level of the first pointer operator encountered
+        plvl = 0  # nesting level of the first pointer operator encountered
 
         while p and context.check_token(i, ["MULT", "LPARENTHESIS"] + ws):
             if context.check_token(i, "MULT") and not plvl:
@@ -152,7 +152,8 @@ class IsVarDeclaration(PrimaryRule):
         tmp = i - 1
         while context.check_token(tmp, ["LPARENTHESIS", "MULT", "BWISE_AND"]):
             tmp -= 1
-        if context.check_token(tmp, ['SPACE', 'TAB']) is False and context.check_token(tmp - 1, ['SPACE', 'TAB']) is False:
+        if context.check_token(tmp, ['SPACE', 'TAB']) is False and context.check_token(tmp - 1,
+                                                                                       ['SPACE', 'TAB']) is False:
             return False, 0
         ret, i = self.var_declaration(context, i)
         if ret is False:

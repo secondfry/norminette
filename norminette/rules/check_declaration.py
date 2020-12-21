@@ -1,5 +1,5 @@
 from rules import Rule
-from scope import *
+
 
 class CheckDeclaration(Rule):
     def __init__(self):

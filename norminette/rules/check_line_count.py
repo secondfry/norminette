@@ -1,5 +1,5 @@
 from rules import Rule
-from context import GlobalScope
+from scope import GlobalScope
 
 
 class CheckLineCount(Rule):

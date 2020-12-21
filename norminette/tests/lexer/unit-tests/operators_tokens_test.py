@@ -1,6 +1,6 @@
 import unittest
-import sys
-from lexer.lexer import Lexer
+
+from lexer import Lexer
 
 
 class TokensOperatorsTest(unittest.TestCase):

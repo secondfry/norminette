@@ -1,6 +1,4 @@
 from rules import PrimaryRule
-from context import GlobalScope, VariableAssignation
-from exceptions import CParsingError
 
 condition_ops = [
     "LESS_OR_EQUAL",
@@ -102,7 +100,7 @@ class IsFunctionCall(PrimaryRule):
                 i = context.skip_ws(i + 1)
                 if context.peek_token(i) is None or context.check_token(i, "NEWLINE") is True:
                     return False, 0
-                #i += 1
+                # i += 1
                 if len(types) > 1:
                     i = context.skip_ws(i, nl=False)
                     if context.check_token(i, "SEMI_COLON") is True:

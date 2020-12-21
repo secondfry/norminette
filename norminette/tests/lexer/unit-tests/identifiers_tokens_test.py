@@ -1,6 +1,6 @@
 import unittest
-import sys
-from lexer.lexer import Lexer
+
+from lexer import Lexer
 
 
 def eat_tokens(line):
@@ -41,5 +41,5 @@ class IdentifiersTokensTest(unittest.TestCase):
 
     def test_31_characters(self):
         self.assertEqual(
-                eat_tokens("this_is_a_very_long_identifier_"),
-                "<IDENTIFIER=this_is_a_very_long_identifier_>")
+            eat_tokens("this_is_a_very_long_identifier_"),
+            "<IDENTIFIER=this_is_a_very_long_identifier_>")

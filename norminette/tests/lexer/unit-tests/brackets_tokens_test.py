@@ -1,14 +1,14 @@
 import unittest
-import sys
-from lexer.lexer import Lexer
+
+from lexer import Lexer
 
 
 class BracketsTokensTest(unittest.TestCase):
 
     def test_opening_bracket(self):
         self.assertEqual(
-                        Lexer("{").get_next_token().type,
-                        "LBRACE")
+            Lexer("{").get_next_token().type,
+            "LBRACE")
 
     def test_closing_bracket(self):
         self.assertEqual(Lexer("}").get_next_token().type, "RBRACE")
@@ -21,13 +21,13 @@ class BracketsTokensTest(unittest.TestCase):
 
     def test_opening_square_bracket(self):
         self.assertEqual(
-                        Lexer("[").get_next_token().type,
-                        "LBRACKET")
+            Lexer("[").get_next_token().type,
+            "LBRACKET")
 
     def test_closing_square_bracket(self):
         self.assertEqual(
-                        Lexer("]").get_next_token().type,
-                        "RBRACKET")
+            Lexer("]").get_next_token().type,
+            "RBRACKET")
 
 
 if __name__ == '__main__':

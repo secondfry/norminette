@@ -1,5 +1,4 @@
 from rules import Rule
-from scope import *
 
 forbidden_cs = [
     "FOR",
@@ -20,6 +19,7 @@ assigns = [
     "OR_ASSIGN",
     "ASSIGN",
 ]
+
 
 class CheckControlStatement(Rule):
     def __init__(self):

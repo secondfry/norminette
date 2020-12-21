@@ -1,6 +1,6 @@
+from lexer import Lexer
 from rules import Rule
-from lexer import Lexer, TokenError
-from scope import *
+from scope import GlobalScope, Function
 
 
 class CheckPreprocessorDefine(Rule):
@@ -69,9 +69,9 @@ class CheckPreprocessorDefine(Rule):
                         elif identifiers[0].value != protection:
                             context.new_error("HEADER_PROT_NAME", tkns[1])
                 elif context.filetype == 'c' and context.scope.include_allowed == True and \
-                    (len(tkns) > tmp + 1 or (len(tkns) == tmp + 1 and identifiers[0].value != protection \
-                    and context.scope.header_protection == -1 )):
-                        context.scope.include_allowed = False
+                        (len(tkns) > tmp + 1 or (len(tkns) == tmp + 1 and identifiers[0].value != protection \
+                                                 and context.scope.header_protection == -1)):
+                    context.scope.include_allowed = False
 
             elif tkn.type in ["IDENTIFIER", "STRING", "CONSTANT"]:
                 if len(identifiers) == 1:

@@ -1,6 +1,5 @@
 from rules import PrimaryRule
-from context import ControlStructure, Function
-from exceptions import CParsingError
+
 
 class IsDeclaration(PrimaryRule):
     def __init__(self):
@@ -9,7 +8,7 @@ class IsDeclaration(PrimaryRule):
         self.scope = []
 
     def run(self, context):
-        #return False, 0
+        # return False, 0
         i = context.skip_ws(0, nl=False)
         p = 0
         ident = None

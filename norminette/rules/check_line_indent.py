@@ -1,6 +1,5 @@
 from rules import Rule
-from scope import *
-
+from scope import GlobalScope
 
 
 class CheckLineIndent(Rule):
@@ -13,9 +12,11 @@ class CheckLineIndent(Rule):
             Each new scope (function, control structure, struct/enum type declaration) adds a tab to the general indentation
         """
         expected = context.scope.indent
-        if context.history[-1] == "IsEmptyLine" or context.history[-1] == "IsComment" or context.history[-1] == "IsPreprocessorStatement":
+        if context.history[-1] == "IsEmptyLine" or context.history[-1] == "IsComment" or context.history[
+            -1] == "IsPreprocessorStatement":
             return False, 0
-        if context.history[-1] != "IsPreprocessorStatement" and type(context.scope) is GlobalScope and context.scope.include_allowed == True:
+        if context.history[-1] != "IsPreprocessorStatement" and type(
+                context.scope) is GlobalScope and context.scope.include_allowed == True:
             context.scope.include_allowed = False
         got = 0
         while context.check_token(got, "TAB"):

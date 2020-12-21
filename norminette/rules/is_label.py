@@ -1,5 +1,6 @@
 from rules import PrimaryRule
 
+
 class IsLabel(PrimaryRule):
     def __init__(self):
         super().__init__()

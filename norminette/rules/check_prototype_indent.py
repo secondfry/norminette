@@ -1,5 +1,7 @@
-from rules import Rule
 import math
+
+from rules import Rule
+
 keywords = [
     # C reserved keywords #
     "AUTO",
@@ -33,13 +35,14 @@ keywords = [
     "UNSIGNED",
     "VOID",
     "VOLATILE",
-    "WHILE", 
+    "WHILE",
     "IDENTIFIER"
 ]
 eol = [
     "SEMI_COLON",
     "LPARENTHESIS"
 ]
+
 
 class CheckPrototypeIndent(Rule):
     def __init__(self):

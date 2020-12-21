@@ -1,5 +1,4 @@
 from rules import Rule
-from scope import *
 
 allowed_on_comment = [
     "COMMENT",
@@ -7,6 +6,7 @@ allowed_on_comment = [
     "SPACE",
     "TAB"
 ]
+
 
 class CheckComment(Rule):
     def __init__(self):

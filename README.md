@@ -1,18 +1,10 @@
 # norminette for 42 schools
 
-## Install:
-
-requires python3.7
+## Install
 
 ```shell
-pip3 install -r requirements.txt
-```
-
-
-To install, simply run
-
-```shell
-python3 setup.py install
+pipenv install
+pip install --editable .
 ```
 
 ## Usage

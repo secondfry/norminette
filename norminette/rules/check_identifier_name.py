@@ -1,12 +1,12 @@
-from lexer import Token
-from rules import Rule
 import string
-from scope import *
 
+from rules import Rule
+from scope import GlobalScope, UserDefinedType
 
 assigns = [
     'ASSIGN'
 ]
+
 
 class CheckIdentifierName(Rule):
     def __init__(self):
@@ -30,8 +30,8 @@ class CheckIdentifierName(Rule):
             for c in sc.fnames[-1]:
                 if c not in legal_characters:
                     context.new_error(
-                                    "FORBIDDEN_CHAR_NAME",
-                                    context.peek_token(context.fname_pos))
+                        "FORBIDDEN_CHAR_NAME",
+                        context.peek_token(context.fname_pos))
                     break
         passed_assign = False
         err = None
@@ -44,7 +44,8 @@ class CheckIdentifierName(Rule):
                     if c not in legal_characters:
                         err = ("FORBIDDEN_CHAR_NAME", context.peek_token(i))
                         break
-                if err is not None and hist not in ['IsFuncDeclaration', 'IsFuncPrototype'] or (hist == 'IsVariable' and passed_assign == True):
+                if err is not None and hist not in ['IsFuncDeclaration', 'IsFuncPrototype'] or (
+                        hist == 'IsVariable' and passed_assign == True):
                     for c in context.peek_token(i).value:
                         if c not in legal_cap_characters:
                             err = ("FORBIDDEN_CHAR_NAME", context.peek_token(i))

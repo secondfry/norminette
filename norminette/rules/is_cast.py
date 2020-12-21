@@ -1,6 +1,4 @@
 from rules import PrimaryRule
-from context import GlobalScope, VariableAssignation
-from exceptions import CParsingError
 
 types = [
     "CHAR",

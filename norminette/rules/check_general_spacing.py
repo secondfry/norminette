@@ -1,16 +1,16 @@
 from rules import Rule
-from scope import *
+
 
 class CheckGeneralSpacing(Rule):
     def __init__(self):
         super().__init__()
         self.depends_on = [
-                        "IsDeclaration",
-                        "IsControlStatement",
-                        "IsExpressionStatement",
-                        "IsAssignation",
-                        "IsFunctionCall",
-                        ]
+            "IsDeclaration",
+            "IsControlStatement",
+            "IsExpressionStatement",
+            "IsAssignation",
+            "IsFunctionCall",
+        ]
 
     def run(self, context):
         """
