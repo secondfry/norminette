@@ -2,7 +2,7 @@ import subprocess
 
 from setuptools import setup, find_namespace_packages
 
-from version import __version__
+from norminette.version import __version__
 
 subprocess.call("pip install -r requirements.txt", shell=True)
 setup(
